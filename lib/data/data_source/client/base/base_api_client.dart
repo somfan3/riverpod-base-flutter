@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:anime_wiki/app/constants/api_constants.dart';
-import 'package:anime_wiki/data/provider/client/base/api_client_default_settings.dart';
-import 'package:anime_wiki/data/provider/client/base/dio_builder.dart';
 import 'package:dio/dio.dart';
+
+import 'api_client_default_settings.dart';
+import 'dio_builder.dart';
 
 class BaseApiClient {
   final String baseUrl;
@@ -34,7 +35,7 @@ class BaseApiClient {
   }
 
   // Get:-----------------------------------------------------------------------
-  Future get(
+  Future<Response> get(
     String url, {
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -56,7 +57,7 @@ class BaseApiClient {
   }
 
   // Post:----------------------------------------------------------------------
-  Future post(
+  Future<Response> post(
     String uri, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -82,7 +83,7 @@ class BaseApiClient {
   }
 
   // Put:-----------------------------------------------------------------------
-  Future put(
+  Future<Response> put(
     String uri, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -108,7 +109,7 @@ class BaseApiClient {
   }
 
   // Delete:--------------------------------------------------------------------
-  Future delete(
+  Future<Response> delete(
     String uri, {
     data,
     Map<String, dynamic>? queryParameters,

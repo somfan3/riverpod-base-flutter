@@ -1,4 +1,3 @@
-import 'package:anime_wiki/data/provider/api_provider.dart';
 import 'package:flutter/material.dart';
 
 void main() {

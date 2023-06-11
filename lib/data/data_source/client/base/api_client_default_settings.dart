@@ -1,4 +1,4 @@
-import 'package:anime_wiki/data/provider/interceptor/log_interceptor.dart';
+import 'package:anime_wiki/data/data_source/interceptor/interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
