@@ -28,13 +28,13 @@ class Anime {
   String? season;
   int? year;
   Broadcast? broadcast;
-  List<MangaInformation>? producers;
-  List<MangaInformation>? licensors;
-  List<MangaInformation>? studios;
-  List<MangaInformation>? genres;
-  List<MangaInformation>? explicitGenres;
-  List<MangaInformation>? themes;
-  List<MangaInformation>? demographics;
+  List<AnimeInformation>? producers;
+  List<AnimeInformation>? licensors;
+  List<AnimeInformation>? studios;
+  List<AnimeInformation>? genres;
+  List<AnimeInformation>? explicitGenres;
+  List<AnimeInformation>? themes;
+  List<AnimeInformation>? demographics;
 
   Anime(
       {this.malId,
@@ -119,45 +119,45 @@ class Anime {
         ? Broadcast.fromJson(json['broadcast'])
         : null;
     if (json['producers'] != null) {
-      producers = <MangaInformation>[];
+      producers = <AnimeInformation>[];
       json['producers'].forEach((v) {
-        producers!.add(MangaInformation.fromJson(v));
+        producers!.add(AnimeInformation.fromJson(v));
       });
     }
     if (json['licensors'] != null) {
-      licensors = <MangaInformation>[];
+      licensors = <AnimeInformation>[];
       json['licensors'].forEach((v) {
-        licensors!.add(MangaInformation.fromJson(v));
+        licensors!.add(AnimeInformation.fromJson(v));
       });
     }
     if (json['studios'] != null) {
-      studios = <MangaInformation>[];
+      studios = <AnimeInformation>[];
       json['studios'].forEach((v) {
-        studios!.add(MangaInformation.fromJson(v));
+        studios!.add(AnimeInformation.fromJson(v));
       });
     }
     if (json['genres'] != null) {
-      genres = <MangaInformation>[];
+      genres = <AnimeInformation>[];
       json['genres'].forEach((v) {
-        genres!.add(MangaInformation.fromJson(v));
+        genres!.add(AnimeInformation.fromJson(v));
       });
     }
     if (json['explicit_genres'] != null) {
-      explicitGenres = <MangaInformation>[];
+      explicitGenres = <AnimeInformation>[];
       json['explicit_genres'].forEach((v) {
-        explicitGenres!.add(MangaInformation.fromJson(v));
+        explicitGenres!.add(AnimeInformation.fromJson(v));
       });
     }
     if (json['themes'] != null) {
-      themes = <MangaInformation>[];
+      themes = <AnimeInformation>[];
       json['themes'].forEach((v) {
-        themes!.add(MangaInformation.fromJson(v));
+        themes!.add(AnimeInformation.fromJson(v));
       });
     }
     if (json['demographics'] != null) {
-      demographics = <MangaInformation>[];
+      demographics = <AnimeInformation>[];
       json['demographics'].forEach((v) {
-        demographics!.add(MangaInformation.fromJson(v));
+        demographics!.add(AnimeInformation.fromJson(v));
       });
     }
   }
@@ -385,15 +385,15 @@ class Broadcast {
   }
 }
 
-class MangaInformation {
+class AnimeInformation {
   int? malId;
   String? type;
   String? name;
   String? url;
 
-  MangaInformation({this.malId, this.type, this.name, this.url});
+  AnimeInformation({this.malId, this.type, this.name, this.url});
 
-  MangaInformation.fromJson(Map<String, dynamic> json) {
+  AnimeInformation.fromJson(Map<String, dynamic> json) {
     malId = json['mal_id'];
     type = json['type'];
     name = json['name'];
