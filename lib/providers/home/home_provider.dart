@@ -4,23 +4,23 @@ import 'package:anime_wiki/models/models.dart';
 import 'package:anime_wiki/repositories/anime/anime_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeProvider extends AsyncNotifier<PaginationData<List<Anime>>> {
+part 'home_state.dart';
+
+class HomeProvider extends StateNotifier<HomeState> {
   final AnimeRepository _repository;
 
-  HomeProvider(this._repository);
-
-  @override
-  FutureOr<PaginationData<List<Anime>>> build() async {
-    // state = const AsyncValue.loading();
-    // state = await AsyncValue.guard(() => fetchData());
-    return fetchData();
+  HomeProvider(this._repository) : super(HomeState()) {
+    getListManga();
   }
 
-  Future<PaginationData<List<Anime>>> fetchData() async {
-    final data = await _repository.getListAnime();
-    return data;
+  Future<void> getListManga() async {
+    state = state.copyWith(
+        listAnimeResult:
+            state.listAnimeResult.copyWidth(state: ApiState.loading));
+    final result = await _repository.getListAnime();
+    state = state.copyWith(listAnimeResult: result);
   }
 }
 
-final homeProvider =
-    FutureProvider((ref) => HomeProvider(ref.watch(animeRepositoryProvider)));
+final homeProvider = StateNotifierProvider<HomeProvider, HomeState>(
+    (ref) => HomeProvider(ref.watch(animeRepositoryProvider)));

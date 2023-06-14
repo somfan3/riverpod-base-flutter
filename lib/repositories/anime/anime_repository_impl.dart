@@ -6,17 +6,25 @@ class AnimeRepositoryImpl extends AnimeRepository {
   AnimeRepositoryImpl(this._api);
 
   @override
-  Future<PaginationData<List<Anime>>> getListAnime() async {
-    final body = await _api.fetchListAnime();
-    final listAnime =
-        List<Anime>.from(body['data'].map((e) => Anime.fromJson(e)));
-    final pagination = Pagination.fromJson(body['pagination']);
-    return PaginationData<List<Anime>>(pagination: pagination, data: listAnime);
+  Future<ApiResult<PaginationData<List<Anime>>>> getListAnime() async {
+    var result = ApiResult<PaginationData<List<Anime>>>(
+        data: PaginationData<List<Anime>>.none(), state: ApiState.none);
+    try {
+      final res = await _api.fetchListAnime();
+      final listAnime =
+          List<Anime>.from(res['data'].map((e) => Anime.fromJson(e)));
+      final pagination = Pagination.fromJson(res['pagination']);
+      final data =
+          PaginationData<List<Anime>>(pagination: pagination, data: listAnime);
+      result = result.copyWidth(data: data, state: ApiState.success);
+    } on DioException catch (e) {
+      final dioException = CustomDioException.fromDioException(e);
+      result = result.copyWidth(
+          state: ApiState.error, message: dioException.message);
+    }
+    return result;
   }
 }
 
-final animeRepositoryProvider = Provider((ref) {
-  final animeApi = ref.watch(animeServiceProvider);
-
-  return AnimeRepositoryImpl(animeApi);
-});
+final animeRepositoryProvider =
+    Provider((ref) => AnimeRepositoryImpl(ref.watch(animeServiceProvider)));

@@ -18,7 +18,7 @@ class Anime {
   String? duration;
   String? rating;
   double? score;
-  int? scoredBy;
+  double? scoredBy;
   int? rank;
   int? popularity;
   int? members;
@@ -38,49 +38,49 @@ class Anime {
 
   Anime(
       {this.malId,
-        this.url,
-        this.images,
-        this.trailer,
-        this.approved,
-        this.titles,
-        this.title,
-        this.titleEnglish,
-        this.titleJapanese,
-        this.titleSynonyms,
-        this.type,
-        this.source,
-        this.episodes,
-        this.status,
-        this.airing,
-        this.aired,
-        this.duration,
-        this.rating,
-        this.score,
-        this.scoredBy,
-        this.rank,
-        this.popularity,
-        this.members,
-        this.favorites,
-        this.synopsis,
-        this.background,
-        this.season,
-        this.year,
-        this.broadcast,
-        this.producers,
-        this.licensors,
-        this.studios,
-        this.genres,
-        this.explicitGenres,
-        this.themes,
-        this.demographics});
+      this.url,
+      this.images,
+      this.trailer,
+      this.approved,
+      this.titles,
+      this.title,
+      this.titleEnglish,
+      this.titleJapanese,
+      this.titleSynonyms,
+      this.type,
+      this.source,
+      this.episodes,
+      this.status,
+      this.airing,
+      this.aired,
+      this.duration,
+      this.rating,
+      this.score,
+      this.scoredBy,
+      this.rank,
+      this.popularity,
+      this.members,
+      this.favorites,
+      this.synopsis,
+      this.background,
+      this.season,
+      this.year,
+      this.broadcast,
+      this.producers,
+      this.licensors,
+      this.studios,
+      this.genres,
+      this.explicitGenres,
+      this.themes,
+      this.demographics});
 
   Anime.fromJson(Map<String, dynamic> json) {
     malId = json['mal_id'];
     url = json['url'];
     images =
-    json['images'] != null ? ImagesWithType.fromJson(json['images']) : null;
+        json['images'] != null ? ImagesWithType.fromJson(json['images']) : null;
     trailer =
-    json['trailer'] != null ? Trailer.fromJson(json['trailer']) : null;
+        json['trailer'] != null ? Trailer.fromJson(json['trailer']) : null;
     approved = json['approved'];
     if (json['titles'] != null) {
       titles = <Titles>[];
@@ -105,8 +105,8 @@ class Anime {
     aired = json['aired'] != null ? Aired.fromJson(json['aired']) : null;
     duration = json['duration'];
     rating = json['rating'];
-    score = json['score'];
-    scoredBy = json['scored_by'];
+    // score = json['score'] != null ? ;
+    scoredBy = json['scored_by']?.toDouble();
     rank = json['rank'];
     popularity = json['popularity'];
     members = json['members'];
@@ -220,8 +220,7 @@ class Trailer {
     youtubeId = json['youtube_id'];
     url = json['url'];
     embedUrl = json['embed_url'];
-    images =
-    json['images'] != null ? ImagesUrl.fromJson(json['images']) : null;
+    images = json['images'] != null ? ImagesUrl.fromJson(json['images']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -245,10 +244,10 @@ class ImagesUrl {
 
   ImagesUrl(
       {this.imageUrl,
-        this.smallImageUrl,
-        this.mediumImageUrl,
-        this.largeImageUrl,
-        this.maximumImageUrl});
+      this.smallImageUrl,
+      this.mediumImageUrl,
+      this.largeImageUrl,
+      this.maximumImageUrl});
 
   ImagesUrl.fromJson(Map<String, dynamic> json) {
     imageUrl = json['image_url'];

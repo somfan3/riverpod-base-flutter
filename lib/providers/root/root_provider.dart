@@ -9,4 +9,5 @@ class RootProvider extends StateNotifier<RootState> {
   }
 }
 
-final rootProvider = StateNotifierProvider((ref) => RootProvider());
+final rootProvider =
+    StateNotifierProvider<RootProvider, RootState>((ref) => RootProvider());
